@@ -3,8 +3,8 @@ import { Card, CardHeader, CardContent, Typography, Grid, Divider } from '@mater
 import { useSpeechContext } from '@speechly/react-client';
 import { ExpenseTrackerContext } from '../../context/context';
 import useStyles from './styles';
-import Form from './Form/Form';
-import List from './List/List';
+import  NewTransactionForm from './Form/form';
+import List from './List/list';
 import InfoCard from '../InfoCard';
 
 const ExpenseTracker = () => {
@@ -20,7 +20,7 @@ const ExpenseTracker = () => {
           <InfoCard />
         </Typography>
         <Divider className={classes.divider} />
-        <Form />
+        <NewTransactionForm />
       </CardContent>
       <CardContent className={classes.cartContent}>
         <Grid container spacing={2}>

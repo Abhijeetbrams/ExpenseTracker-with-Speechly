@@ -1,14 +1,13 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TextField, Typography, Grid, Button, FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
 import { v4 as uuidv4 } from 'uuid';
 
 import { useSpeechContext } from '@speechly/react-client';
-import Snackbar from '../../Snackbar/Snackbar';
-import formatDate from '../../../utils/formatDate';
-import { ExpenseTrackerContext } from '../../../context/context';
-import { incomeCategories, expenseCategories } from '../../../constants/categories';
+import CustomizedSnackbar from '../../Snackbar/snackbar';
+import formatDate from '../../../Utils/formatDate';
+import { incomeCategories, expenseCategories } from '../../../Constants/categories';
 import useStyles from './styles';
-import connect from 'redux';
+import {connect} from 'react-redux';
 import {AddTransactionAction} from '../../../Redux/ExpenseIncome/ExpenseIncomeAction';
 
 
@@ -84,7 +83,7 @@ const NewTransactionForm = ({addTransaction}) => {
 
   return (
     <Grid container spacing={2}>
-      <Snackbar open={open} setOpen={setOpen} />
+      <CustomizedSnackbar open={open} setOpen={setOpen} />
       <Grid item xs={12}>
         <Typography align="center" variant="subtitle2" gutterBottom>
         {segment ? (
@@ -128,4 +127,4 @@ const mapDispatchToProps=(dispatch)=>({
 addTransaction:transaction=>dispatch(AddTransactionAction(transaction))
 });
 
-export default connect(mapDispatchToProps)(NewTransactionForm);
+export default connect(null,mapDispatchToProps)(NewTransactionForm);
