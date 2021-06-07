@@ -39,7 +39,12 @@ const NewTransactionForm = ({addTransaction}) => {
     setFormData(initialState);
   };
 
+
+  // Adding segment as an dependency array because whenever it's changed we need
+  // to run the logic as we have declared intents in the Speechly configuration
+  // and on the basis of that will update the Form Data.
   useEffect(() => {
+    
     if (segment) {
       if (segment.intent.intent === 'add_expense') {
         setFormData({ ...formData, type: 'Expense' });
@@ -53,12 +58,19 @@ const NewTransactionForm = ({addTransaction}) => {
 
       segment.entities.forEach((s) => {
         const category = `${s.value.charAt(0)}${s.value.slice(1).toLowerCase()}`;
-
+// As while speaking it converts the category to word as a capital and to handle
+// this we'll change this into small letter and 1st letters as capital.
         switch (s.type) {
+// Now as we defined the variables as Entity in the SAL configuration of Speechly
+// So, whenever Speechly converts speech to word it'll map the correponding
+// Entity and here we're fetching these entities and update the formData. 
           case 'amount':
             setFormData({ ...formData, amount: s.value });
             break;
           case 'category':
+// To check suppose User says Income as a type but says Category as Travel which
+// is not basically belongs to this type so thus we're changing the value
+// of Type on the basis of Category.
             if (incomeCategories.map((iC) => iC.type).includes(category)) {
               setFormData({ ...formData, type: 'Income', category });
             } else if (expenseCategories.map((iC) => iC.type).includes(category)) {
@@ -72,13 +84,15 @@ const NewTransactionForm = ({addTransaction}) => {
             break;
         }
       });
-
+// segment.isFinal - When we completed our speech and paused for long time and checking all the
+// data in the form is filled or the whole formData is updated from speech.
       if (segment.isFinal && formData.amount && formData.category && formData.type && formData.date) {
         createTransaction();
       }
     }
   }, [segment]);
 
+// 
   const selectedCategories = formData.type === 'Income' ? incomeCategories : expenseCategories;
 
   return (
@@ -97,6 +111,7 @@ const NewTransactionForm = ({addTransaction}) => {
       <Grid item xs={6}>
         <FormControl fullWidth>
           <InputLabel>Type</InputLabel>
+          { /* here we're setting the formData if we put values in the form manually */ }
           <Select value={formData.type} onChange={(e) => setFormData({ ...formData, type: e.target.value })}>
             <MenuItem value="Income">Income</MenuItem>
             <MenuItem value="Expense">Expense</MenuItem>
