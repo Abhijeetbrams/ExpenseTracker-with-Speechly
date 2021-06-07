@@ -1,6 +1,7 @@
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Speechly Playground Deployed Model - https://api.speechly.com/dashboard/#/playground/41ab98a3-6d98-4812-b2ae-fa1f44cf83b1?language=en-US
 
 ## Available Scripts
 
