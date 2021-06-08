@@ -8,7 +8,7 @@ import formatDate from '../../../Utils/formatDate';
 import { incomeCategories, expenseCategories } from '../../../Constants/categories';
 import useStyles from './styles';
 import {connect} from 'react-redux';
-import {AddTransactionAction} from '../../../Redux/ExpenseIncome/ExpenseIncomeAction';
+import {AddTransactionAction,GetBalanceAction} from '../../../Redux/ExpenseIncome/ExpenseIncomeAction';
 
 
 const initialState = {
@@ -34,8 +34,10 @@ const NewTransactionForm = ({addTransaction}) => {
       setFormData({ ...formData, type: 'Expense' });
     }
 
+    if (formData.amount && formData.category && formData.type && formData.date) {
     setOpen(true);
     addTransaction({ ...formData, amount: Number(formData.amount), id: uuidv4() });
+    }
     setFormData(initialState);
   };
 

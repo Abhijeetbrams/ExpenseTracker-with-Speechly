@@ -4,6 +4,9 @@ import MuiAlert from '@material-ui/lab/Alert';
 
 import useStyles from './styles';
 
+// this snackbar is used to show the Notification after every creation of 
+// transaction and setting state which will be resetted to false means to
+// hide the Snackbar after 6 sec or when user manually click on close.
 const CustomizedSnackbar = ({ open, setOpen }) => {
   const classes = useStyles();
 

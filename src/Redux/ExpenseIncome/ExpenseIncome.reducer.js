@@ -1,7 +1,8 @@
-import {addTransaction,deleteTransaction} from './ExpenseIncomeUtil';
+import {addTransaction,deleteTransaction,calculateBalance} from './ExpenseIncomeUtil';
 
 const intial_state={
-    expense_income:[]
+    expense_income:[],
+    balance:parseInt(0)
 }
 
 const ExpenseIncomeReducer=(state=intial_state,action)=>{
@@ -16,6 +17,11 @@ const ExpenseIncomeReducer=(state=intial_state,action)=>{
         return{
             ...state,
             expense_income:deleteTransaction(state.expense_income,action.payload)
+        }
+    case "GET_BALANCE":
+        return{
+            ...state,
+          balance:parseInt(calculateBalance(state.expense_income))
         }
     default:
         return state;

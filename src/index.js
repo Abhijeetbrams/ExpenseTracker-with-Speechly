@@ -8,7 +8,7 @@ import { SpeechProvider } from '@speechly/react-client';
 
 import {PersistGate} from 'redux-persist/integration/react';
 import {persistor} from './Redux/store';
-
+import './index.css';
 
 ReactDOM.render(
   <SpeechProvider appId="41ab98a3-6d98-4812-b2ae-fa1f44cf83b1" language="en-US">

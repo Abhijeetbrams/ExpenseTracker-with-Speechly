@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { Card, CardHeader, CardContent, Typography } from '@material-ui/core';
 import { Doughnut } from 'react-chartjs-2';
 
@@ -10,8 +10,9 @@ import { incomeCategories, expenseCategories, resetCategories } from '../../Cons
 
 import {connect} from 'react-redux';
 import { CodeSharp } from '@material-ui/icons';
+import {GetBalanceAction} from '../../Redux/ExpenseIncome/ExpenseIncomeAction';
 
-const DetailsCard = ({ title, subheader,transactions }) => {
+const DetailsCard = ({ title, subheader,transactions,getBalance }) => {
 
    /* const transaction=[{
        title:"Income",
@@ -26,6 +27,9 @@ const DetailsCard = ({ title, subheader,transactions }) => {
         Date:"17.12.2020"
      }]
     let updateTrans=transactions?transactions:transaction;*/
+    useEffect(()=>{
+        getBalance();
+    },[JSON.stringify(transactions)])
 
     const useTransactions = () => {
         resetCategories();
@@ -76,6 +80,9 @@ const DetailsCard = ({ title, subheader,transactions }) => {
 const mapStateToProps=(state)=>({
     transactions:state.expenseIncome.expense_income
 })
+const mapDispatchToProps=(dispatch)=>({
+    getBalance:()=>dispatch(GetBalanceAction())
+});
 
-export default connect(mapStateToProps)(DetailsCard);
+export default connect(mapStateToProps,mapDispatchToProps)(DetailsCard);
 

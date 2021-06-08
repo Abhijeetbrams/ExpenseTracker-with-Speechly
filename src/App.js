@@ -6,7 +6,6 @@ import { PushToTalkButton, PushToTalkButtonContainer } from '@speechly/react-ui'
 
 import DetailsCard from './Components/Details/details.component';
 import Main from './Components/Main/main';
-
 import useStyles from './styles';
 
 const App = () => {
@@ -44,5 +43,6 @@ const App = () => {
     </div>
   );
 };
+
 
 export default App;

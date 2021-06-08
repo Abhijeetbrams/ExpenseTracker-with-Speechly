@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { List as MUIList, ListItem, ListItemAvatar, Avatar, ListItemText, ListItemSecondaryAction, IconButton, Slide } from '@material-ui/core';
 import { Delete, MoneyOff } from '@material-ui/icons';
 import {DeleteTransactionAction} from '../../../Redux/ExpenseIncome/ExpenseIncomeAction';
@@ -8,7 +8,7 @@ import {connect} from 'react-redux';
 const List = ({deleteTransaction,transactions}) => {
   const classes = useStyles();
   //const { transactions, deleteTransaction } = useContext(ExpenseTrackerContext);
-
+ 
   return (
     <MUIList dense={false} className={classes.list}>
       {transactions.map((transaction) => (
